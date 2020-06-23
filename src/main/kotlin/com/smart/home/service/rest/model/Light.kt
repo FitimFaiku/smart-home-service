@@ -2,13 +2,23 @@ package com.smart.home.service.rest.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.math.BigInteger
+import java.util.*
+import javax.persistence.*
 
+@Entity
+@Table
 data class Light (
         // @JsonProperty("id")
-        val id: Int,
+        @Id
+        @GeneratedValue
+        @Column(name = "id", length = 16, unique = true, nullable = false)
+        val id: UUID? = null,
 
-        val description: String,
+        val description: String = "",
 
-        val dimmingValue: Int
-) {}
-
+        var dimmingValue: Int = 0
+) {
+    override fun toString(): String {
+        return this.toString()
+    }
+}

@@ -11,18 +11,25 @@ import java.util.*
 class BlindController(val blindService: BlindService) {
 
 
-    @GetMapping("/all/position")
+    @GetMapping("/all")
     fun position(): List<Blind> {
         return blindService.getAllBlinds()
     }
 
-    @GetMapping("/position")
-    fun getPosition(@RequestParam(value = "uuid") uuid: UUID): Optional<Blind> {
-        return blindService.getBlind(uuid)
+    @PostMapping("/add")
+    fun add(@RequestBody  newBlind: Blind): Blind? {
+        if(!newBlind.description.isNullOrEmpty()){
+            return blindService.addNewBlind(newBlind)
+        }
+        return null
+    }
+    @PostMapping("/position/{id}/{value}")
+    fun setPosition(@PathVariable("id") id:UUID,@PathVariable("value") value:Int ) {
+        return blindService.changePosition(id, value)
     }
 
-    @PostMapping("/add")
-    fun add(@RequestBody  newBlind: Blind): Blind {
-        return blindService.addNewBlind(newBlind)
+    @DeleteMapping("/delete/{id}")
+    fun remove(@PathVariable("id") id:UUID) {
+        blindService.deleteBlind(id)
     }
 }

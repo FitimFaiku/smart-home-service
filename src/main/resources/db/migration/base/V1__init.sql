@@ -6,3 +6,7 @@ grant all on all tables in schema smarthome to ${dbUser};
 create table if not exists smarthome.blind(id UUID not null primary key,
                       description varchar,
                       position_in_percent numeric);
+
+create table if not exists smarthome.light(id UUID not null primary key,
+                      description varchar,
+                      dimming_value numeric);

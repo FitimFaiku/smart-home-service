@@ -15,7 +15,7 @@ data class Blind (
 
         val description: String = "",
 
-        val positionInPercent: Int = 0
+        var positionInPercent: Int = 0
 ) {
         override fun toString(): String {
                 return this.toString()
